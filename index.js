@@ -47,8 +47,19 @@ app.post('/forward', async (req, res) => {
   }
 });
 
+app.use((req, res) => {
+    return res.status(404).json({
+      code: 404,
+      response_code : "99",
+      status: "failed",
+      message: 'Endpoint not found',
+      error: "An Error Occured!",
+    });
+  });
+
 // Start the server on port 5001
 const PORT = 5001;
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`API server is running on port ${PORT}`);
 });
+
