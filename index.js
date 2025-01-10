@@ -1,9 +1,14 @@
 import express from 'express';
 import axios from 'axios';
 import morgan from "morgan";
+import logger from './logger.js';
 
 const app = express();
 app.use(express.json()); // Middleware to parse JSON request bodies
+
+// Redirect console output to the logger
+console.log = (...args) => logger.info(args.map(String).join(' '));
+console.error = (...args) => logger.error(args.map(String).join(' '));
 
 // Logging middleware to log to CLI
 app.use(morgan("combined"));
