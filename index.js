@@ -10,7 +10,7 @@ app.use(morgan("combined"));
 
 // POST endpoint to forward data or make a GET request
 app.post('/forward', async (req, res) => {
-  const { url, data, method = 'POST' } = req.body;
+  const { url, data, method = 'POST', headers } = req.body;
 
   if (!url) {
     return res.status(400).json({ error: '"url" field is required.' });
@@ -18,7 +18,7 @@ app.post('/forward', async (req, res) => {
 
   try {
     // Extract headers from the incoming request
-    const forwardedHeaders = req.headers;
+    const forwardedHeaders = headers
 
     // Set up Axios request configuration
     const config = {
@@ -30,12 +30,12 @@ app.post('/forward', async (req, res) => {
 
     // Make the HTTP request using Axios
     const response = await axios(config);
-    console.log(response)
+    // console.log(response)
 
     // Return the response received from the forwarded request
     res.json({
       status: 'success',
-      forwardedResponse: response.data,
+      response: response.data,
     });
   } catch (error) {
     // Handle errors and return a meaningful response
