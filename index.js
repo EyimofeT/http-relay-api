@@ -36,7 +36,11 @@ app.post('/forward', async (req, res) => {
     // Make the HTTP request using Axios
     const response = await axios(config);
 
-    // console.log(response.data)
+    console.log("Request : ")
+    console.log(req.body)
+
+    console.log("Response : ")
+    console.log(response.data)
 
     // Return the response received from the forwarded request
     res.json({
