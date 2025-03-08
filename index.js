@@ -37,7 +37,10 @@ app.post('/forward', async (req, res) => {
     const response = await axios(config);
 
     console.log("Request : ")
-    console.log(req.body)
+    console.log(req.body.url)
+    console.log(req.body.method)
+    console.log(req.body.headers)
+    console.log(req.body.data)
 
     console.log("Response : ")
     console.log(response.data)
